@@ -46,43 +46,44 @@ void setup() {
 void loop() {
 
 
- 
- if (val <= 0)
-    {
-      rate = 10;
-    }
-    else if (val >= 179)
-    {
-      rate = -10;
-    }
 
-    val += rate;
-    myServo.write(val);
-    delay(100);
-    
-    
-    /*digitalWrite(TRIGGER, HIGH);
-    delay(10);
-    digitalWrite(TRIGGER, LOW);
+  if (val <= 0)
+  {
+    rate = 50;
+  }
+  else if (val >= 179)
+  {
+    rate = -50;
+  }
+
+  val += rate;
+  myServo.write(val);
+  delay(100);
 
 
-    period = pulseIn(ECHO, HIGH);
-    delay(5);
 
-   
-    distance_cm = (period * 0.0343) / 2;
+  digitalWrite(TRIGGER, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(TRIGGER, LOW);
 
-    if (distance_cm <= 8)
-    {
-      digitalWrite(LED, HIGH);
-    }
-    else
-    {
-      digitalWrite(LED, LOW);
-    }
-*/
 
-  
+  period = pulseIn(ECHO, HIGH);
+  delayMicroseconds(10);
+
+
+  distance_cm = (period * 0.0343) / 2;
+
+  if (distance_cm <= 8)
+  {
+    digitalWrite(LED, HIGH);
+  }
+  else
+  {
+    digitalWrite(LED, LOW);
+  }
+
+
+
 
   // put your main code here, to run repeatedly:
   /*myServo.write(179);
