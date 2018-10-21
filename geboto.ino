@@ -11,7 +11,7 @@ const int IN3 = 5;
 const int IN4 = 4;
 
 const int TRIGGER = 2;
-const int ECHO = 3;
+const int ECHO = 12;
 
 const int LED = 8;
 
@@ -41,6 +41,8 @@ void setup() {
   pinMode(ECHO, INPUT);
 
   pinMode(LED, OUTPUT);
+
+  Serial.begin(9600);
 }
 
 void loop() {
@@ -49,11 +51,11 @@ void loop() {
 
   if (val <= 0)
   {
-    rate = 50;
+    rate = 30;
   }
   else if (val >= 179)
   {
-    rate = -50;
+    rate = -30;
   }
 
   val += rate;
@@ -63,15 +65,16 @@ void loop() {
 
 
   digitalWrite(TRIGGER, HIGH);
-  delayMicroseconds(10);
+  delay(10);
   digitalWrite(TRIGGER, LOW);
 
 
-  period = pulseIn(ECHO, HIGH);
-  delayMicroseconds(10);
+  period = pulseIn(ECHO, HIGH, 50000);
+  delay(10);
 
 
   distance_cm = (period * 0.0343) / 2;
+  Serial.println(distance_cm);
 
   if (distance_cm <= 8)
   {
@@ -84,7 +87,6 @@ void loop() {
 
 
 
-
   // put your main code here, to run repeatedly:
   /*myServo.write(179);
     delay(1000);
@@ -94,7 +96,7 @@ void loop() {
     delay(1000);
     myServo.write(90);
     delay(1000);*/
-  //myServo.write(90);
+  // myServo.write(90);
 
 }
 
