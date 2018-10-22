@@ -45,10 +45,14 @@ void setup() {
   Serial.begin(9600);
 }
 
+
+
+//================================ MAIN BEGIN =======================================
+
 void loop() {
 
 
-
+// =========== POSICIONAMENTO DO SENSOR ===============================================
   if (val <= 0)
   {
     rate = 30;
@@ -64,17 +68,18 @@ void loop() {
 
 
 
+// ============= LEITURA DA DISTANCIA ======================
   digitalWrite(TRIGGER, HIGH);
   delay(10);
   digitalWrite(TRIGGER, LOW);
 
 
-  period = pulseIn(ECHO, HIGH, 50000);
+  period = pulseIn(ECHO, HIGH, 50000); 
   delay(10);
 
 
-  distance_cm = (period * 0.0343) / 2;
-  Serial.println(distance_cm);
+  distance_cm = (period * 0.0343) / 2; // Transformando em centimetros
+  Serial.println(distance_cm); 
 
   if (distance_cm <= 8)
   {
@@ -101,7 +106,7 @@ void loop() {
 }
 
 
-
+//=========================================================== MAIN END ================================================
 
 void backward(int rate)
 {
@@ -185,4 +190,9 @@ void breake()
 
   //digitalWrite(EN1, HIGH);
   // digitalWrite(EN2, HIGH);
+}
+
+void alignSensor()
+{
+  myServo.write(90);
 }
