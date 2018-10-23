@@ -1,12 +1,12 @@
 #include <Servo.h>
-const int SERVO = 11;
+const int SERVO = 9;
 
 
-const int EN1 = 9;
+const int EN1 = 11;
 const int IN1 = 7;
 const int IN2 = 6;
 
-const int EN2 = 10;
+const int EN2 = 3;
 const int IN3 = 5;
 const int IN4 = 4;
 
@@ -43,6 +43,7 @@ void setup() {
   pinMode(LED, OUTPUT);
 
   Serial.begin(9600);
+  delay(2000);
 }
 
 
@@ -70,18 +71,18 @@ void loop() {
 
 // LEITURA DA DISTANCIA 
   digitalWrite(TRIGGER, HIGH);
-  delayMicroseconds(100);
+  delayMicroseconds(10);
   digitalWrite(TRIGGER, LOW);
 
 
-  period = pulseIn(ECHO, HIGH, 500000); 
-  delayMicroseconds(1000);
+  period = pulseIn(ECHO, HIGH, 200000); 
+  delayMicroseconds(100);
 
 
   distance_cm = (period * 0.0343) / 2; // Transformando em centimetros
   Serial.println(distance_cm); 
 
-  if (distance_cm <= 16)
+  if (distance_cm <= 13)
   {
     digitalWrite(LED, HIGH);
   }
@@ -90,7 +91,7 @@ void loop() {
     digitalWrite(LED, LOW);
   }
 
-
+  foward(187);
 
   
 
@@ -115,7 +116,7 @@ void backward(int rate)
 
   digitalWrite(IN3, LOW);
   digitalWrite(IN4, HIGH);
-  analogWrite(EN2, rate * 0.77);
+  analogWrite(EN2, rate );
 
 }
 
@@ -127,14 +128,14 @@ void foward(int rate)
 
   digitalWrite(IN1, HIGH);
   digitalWrite(IN2, LOW);
-  analogWrite(EN1, rate);
+  analogWrite(EN1, rate *0.89);
 
 
 
 
   digitalWrite(IN3, HIGH);
   digitalWrite(IN4, LOW);
-  analogWrite(EN2, rate * 0.77);
+  analogWrite(EN2, rate );
 }
 
 void left(int rate)
@@ -151,7 +152,7 @@ void left(int rate)
 
   digitalWrite(IN3, HIGH);
   digitalWrite(IN4, LOW);
-  analogWrite(EN2, rate * 0.77);
+  analogWrite(EN2, rate );
 }
 
 void right(int rate)
@@ -168,7 +169,7 @@ void right(int rate)
 
   digitalWrite(IN3, LOW);
   digitalWrite(IN4, HIGH);
-  analogWrite(EN2, rate * 0.77);
+  analogWrite(EN2, rate);
 }
 void breake()
 {
