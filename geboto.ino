@@ -91,11 +91,16 @@ void loop() {
     digitalWrite(LED, LOW);
   }
 
-  foward(187);
+  right(120);
+  delay(500);
+  breake();
+  delay(2000);
+  
+  
 
   
 
-//  alignSensor();
+// alignSensor();
 
 }
 
